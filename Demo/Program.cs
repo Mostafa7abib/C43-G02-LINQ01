@@ -65,7 +65,43 @@ namespace Demo
             #endregion
 
             #region Video 04 - Data Setup
-            Console.WriteLine(ProductList[0]);
+            //Console.WriteLine(ProductList[0]);
+            #endregion
+
+            #region Video 05 - Filteration [Restriction] Operators - Where
+            #region Ex 01 - Get Element Out of Stock
+            //1- Fluent Syntax
+            var Result = ProductList.Where(P => P.UnitsInStock == 0);
+            //2- Query Syntax
+            Result = from P in ProductList
+                     where P.UnitsInStock == 0                     
+                     select P;
+            foreach (var item in Result)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
+            #region EX 02 - Get Elements in Stock && Category is Meat/Poultry
+            //1- Fluent Syntax
+            var Result2 = ProductList.Where(P => P.UnitsInStock > 0 && P.Category == "Meat/Poultry");
+            //2- Query Syntax
+            Result2 = from P in ProductList
+                      where P.UnitsInStock > 0 && P.Category == "Meat/Poultry"
+                      select P;
+            foreach (var item in Result2)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
+            #region Ex 03 - Get Element out of stock in First 10 Elements
+            //Indexed Where
+            //1- Fluent Syntax - valid in it only
+            var Result3 = ProductList.Where((P, I) => I < 10 && P.UnitsInStock == 0);
+            foreach (var item in Result3)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
             #endregion
         }
     }
