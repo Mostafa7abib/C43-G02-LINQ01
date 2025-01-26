@@ -1,4 +1,5 @@
-﻿namespace Demo
+﻿using static Demo.ListGenerator;
+namespace Demo
 {
     internal class Program
     {
@@ -42,25 +43,29 @@
 
             #region Video 03 - LINQ Execution Ways
             #region Deferred Execution
-            // 1- Deferred Way 
-            List<int> Numbers = new List<int>(10) { 1, 2, 3, 4, 5, 6, 7, 9 };
-            var Result = Numbers.Where(N => N % 2 == 1);
-            Numbers.AddRange(new int[] { 10, 11, 12, 13, 14, 15 });
-            foreach (var item in Result)
-            {
-                Console.WriteLine(item);
-            }
+            //// 1- Deferred Way 
+            //List<int> Numbers = new List<int>(10) { 1, 2, 3, 4, 5, 6, 7, 9 };
+            //var Result = Numbers.Where(N => N % 2 == 1);
+            //Numbers.AddRange(new int[] { 10, 11, 12, 13, 14, 15 });
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
             #endregion
             #region Immediate Execution
-            // 2- Immediate Way
-            List<int> Numbers2 = new List<int>(10) { 1, 2, 3, 4, 5, 6, 7, 9 };
-            var Result2 = Numbers2.Where(N => N % 2 == 1).ToList();
-            Numbers2.AddRange(new int[] { 10, 11, 12, 13, 14, 15 });
-            foreach (var item in Result2)
-            {
-                Console.WriteLine(item);
-            }
+            //// 2- Immediate Way
+            //List<int> Numbers2 = new List<int>(10) { 1, 2, 3, 4, 5, 6, 7, 9 };
+            //var Result2 = Numbers2.Where(N => N % 2 == 1).ToList();
+            //Numbers2.AddRange(new int[] { 10, 11, 12, 13, 14, 15 });
+            //foreach (var item in Result2)
+            //{
+            //    Console.WriteLine(item);
+            //}
             #endregion
+            #endregion
+
+            #region Video 04 - Data Setup
+            Console.WriteLine(ProductList[0]);
             #endregion
         }
     }
