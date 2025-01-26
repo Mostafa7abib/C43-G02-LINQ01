@@ -106,74 +106,125 @@ namespace Demo
 
             #region Video 06 - Projection[Transformation] Operators - [Select - SelectMany]
             #region Ex 01 - Select Product Name
+            ////Fluent Syntax
+            //var Result = ProductList.Select(P => P.ProductName);
+            ////Query Syntax
+            //Result = from P in ProductList
+            //         select P.ProductName;
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Ex 02 - Select Customer Names
+            ////Fluent Syntax
+            //var C = CustomerList.Select(P => P.CustomerName);
+            ////Query Syntax
+            //C = from P in CustomerList
+            //    select P.CustomerName;
+            //foreach (var item in C)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Ex 03 - select Customer Orders
+            ////Fluent Syntax
+            //var Result2 = CustomerList.SelectMany(C => C.Orders);
+            ////Query Syntax
+            //Result2 = from c in CustomerList
+            //          from O in c.Orders
+            //          select O;
+            //foreach (var item in Result2)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Ex 04 - Select ProductID , ProductName
+            ////Fluent Syntax
+            //var Result3 = ProductList.Select(P => new{ P.ProductID, P.ProductName});
+            ////Query Syntax
+            //Result3 = from P in ProductList
+            //          select new 
+            //          { 
+            //              P.ProductID,
+            //              P.ProductName 
+            //          };
+            //foreach (var item in Result3)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Ex 05 - Select Product In Stock And Apply Discount 10% On Its Price
+            ////Fluent Syntax
+            //var Result4 = ProductList.Where(P => P.UnitsInStock > 0)
+            //    .Select(P => new { DiscountedPrice = P.UnitPrice - (P.UnitPrice* 0.1m) });
+            ////Query Syntax
+            //Result4 = from P in ProductList
+            //          where P.UnitsInStock > 0
+            //          select new
+            //          {
+            //              DiscountedPrice = P.UnitPrice - (P.UnitPrice * 0.1m)
+            //          };
+            //foreach (var item in Result4)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Indxed Select
+            //var List = ProductList.Where(P=>P.UnitsInStock>0)
+            //    .Select((P, I) => new { P.ProductID, P.ProductName, Index = I });
+            //foreach (var item in List)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #endregion
+
+            #region Video 07 - Ordering Operators
+            #region Get Products Ordered By Price Ascending
             //Fluent Syntax
-            var Result = ProductList.Select(P => P.ProductName);
+            var Result = ProductList.OrderBy(P=>P.UnitPrice);
             //Query Syntax
             Result = from P in ProductList
-                     select P.ProductName;
+                     orderby P.UnitPrice
+                     select P;
             foreach (var item in Result)
             {
                 Console.WriteLine(item);
             }
             #endregion
-            #region Ex 02 - Select Customer Names
+            #region Get Products Ordered By Price Desc
             //Fluent Syntax
-            var C = CustomerList.Select(P => P.CustomerName);
+            var Result1 = ProductList.OrderByDescending(P => P.UnitPrice);
             //Query Syntax
-            C = from P in CustomerList
-                select P.CustomerName;
-            foreach (var item in C)
+            Result1 = from P in ProductList
+                      orderby P.UnitPrice descending
+                      select P;
+            foreach (var item in Result1)
             {
                 Console.WriteLine(item);
             }
             #endregion
-            #region Ex 03 - select Customer Orders
+            #region Get Products Ordered By Price && Numbers of items in stock
             //Fluent Syntax
-            var Result2 = CustomerList.SelectMany(C => C.Orders);
+            var Result2 = ProductList.OrderBy(P => P.UnitPrice).ThenBy(P => P.UnitsInStock);
             //Query Syntax
-            Result2 = from c in CustomerList
-                      from O in c.Orders
-                      select O;
+            Result2 = from P in ProductList
+                      orderby P.UnitPrice, P.UnitsInStock
+                      select P;
             foreach (var item in Result2)
             {
                 Console.WriteLine(item);
             }
             #endregion
-            #region Ex 04 - Select ProductID , ProductName
+            #region Reverse
             //Fluent Syntax
-            var Result3 = ProductList.Select(P => new{ P.ProductID, P.ProductName});
+            var Result3 = ProductList.OrderBy(P => P.UnitPrice).Reverse();
             //Query Syntax
-            Result3 = from P in ProductList
-                      select new 
-                      { 
-                          P.ProductID,
-                          P.ProductName 
-                      };
+            Result3 = (from P in ProductList
+                       orderby P.UnitPrice
+                       select P).Reverse();
             foreach (var item in Result3)
-            {
-                Console.WriteLine(item);
-            }
-            #endregion
-            #region Ex 05 - Select Product In Stock And Apply Discount 10% On Its Price
-            //Fluent Syntax
-            var Result4 = ProductList.Where(P => P.UnitsInStock > 0)
-                .Select(P => new { DiscountedPrice = P.UnitPrice - (P.UnitPrice* 0.1m) });
-            //Query Syntax
-            Result4 = from P in ProductList
-                      where P.UnitsInStock > 0
-                      select new
-                      {
-                          DiscountedPrice = P.UnitPrice - (P.UnitPrice * 0.1m)
-                      };
-            foreach (var item in Result4)
-            {
-                Console.WriteLine(item);
-            }
-            #endregion
-            #region Indxed Select
-            var List = ProductList.Where(P=>P.UnitsInStock>0)
-                .Select((P, I) => new { P.ProductID, P.ProductName, Index = I });
-            foreach (var item in List)
             {
                 Console.WriteLine(item);
             }
