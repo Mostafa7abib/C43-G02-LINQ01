@@ -70,34 +70,110 @@ namespace Demo
 
             #region Video 05 - Filteration [Restriction] Operators - Where
             #region Ex 01 - Get Element Out of Stock
-            //1- Fluent Syntax
-            var Result = ProductList.Where(P => P.UnitsInStock == 0);
-            //2- Query Syntax
+            ////1- Fluent Syntax
+            //var Result = ProductList.Where(P => P.UnitsInStock == 0);
+            ////2- Query Syntax
+            //Result = from P in ProductList
+            //         where P.UnitsInStock == 0                     
+            //         select P;
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region EX 02 - Get Elements in Stock && Category is Meat/Poultry
+            ////1- Fluent Syntax
+            //var Result2 = ProductList.Where(P => P.UnitsInStock > 0 && P.Category == "Meat/Poultry");
+            ////2- Query Syntax
+            //Result2 = from P in ProductList
+            //          where P.UnitsInStock > 0 && P.Category == "Meat/Poultry"
+            //          select P;
+            //foreach (var item in Result2)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Ex 03 - Get Element out of stock in First 10 Elements
+            ////Indexed Where
+            ////1- Fluent Syntax - valid in it only
+            //var Result3 = ProductList.Where((P, I) => I < 10 && P.UnitsInStock == 0);
+            //foreach (var item in Result3)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #endregion
+
+            #region Video 06 - Projection[Transformation] Operators - [Select - SelectMany]
+            #region Ex 01 - Select Product Name
+            //Fluent Syntax
+            var Result = ProductList.Select(P => P.ProductName);
+            //Query Syntax
             Result = from P in ProductList
-                     where P.UnitsInStock == 0                     
-                     select P;
+                     select P.ProductName;
             foreach (var item in Result)
             {
                 Console.WriteLine(item);
             }
             #endregion
-            #region EX 02 - Get Elements in Stock && Category is Meat/Poultry
-            //1- Fluent Syntax
-            var Result2 = ProductList.Where(P => P.UnitsInStock > 0 && P.Category == "Meat/Poultry");
-            //2- Query Syntax
-            Result2 = from P in ProductList
-                      where P.UnitsInStock > 0 && P.Category == "Meat/Poultry"
-                      select P;
+            #region Ex 02 - Select Customer Names
+            //Fluent Syntax
+            var C = CustomerList.Select(P => P.CustomerName);
+            //Query Syntax
+            C = from P in CustomerList
+                select P.CustomerName;
+            foreach (var item in C)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
+            #region Ex 03 - select Customer Orders
+            //Fluent Syntax
+            var Result2 = CustomerList.SelectMany(C => C.Orders);
+            //Query Syntax
+            Result2 = from c in CustomerList
+                      from O in c.Orders
+                      select O;
             foreach (var item in Result2)
             {
                 Console.WriteLine(item);
             }
             #endregion
-            #region Ex 03 - Get Element out of stock in First 10 Elements
-            //Indexed Where
-            //1- Fluent Syntax - valid in it only
-            var Result3 = ProductList.Where((P, I) => I < 10 && P.UnitsInStock == 0);
+            #region Ex 04 - Select ProductID , ProductName
+            //Fluent Syntax
+            var Result3 = ProductList.Select(P => new{ P.ProductID, P.ProductName});
+            //Query Syntax
+            Result3 = from P in ProductList
+                      select new 
+                      { 
+                          P.ProductID,
+                          P.ProductName 
+                      };
             foreach (var item in Result3)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
+            #region Ex 05 - Select Product In Stock And Apply Discount 10% On Its Price
+            //Fluent Syntax
+            var Result4 = ProductList.Where(P => P.UnitsInStock > 0)
+                .Select(P => new { DiscountedPrice = P.UnitPrice - (P.UnitPrice* 0.1m) });
+            //Query Syntax
+            Result4 = from P in ProductList
+                      where P.UnitsInStock > 0
+                      select new
+                      {
+                          DiscountedPrice = P.UnitPrice - (P.UnitPrice * 0.1m)
+                      };
+            foreach (var item in Result4)
+            {
+                Console.WriteLine(item);
+            }
+            #endregion
+            #region Indxed Select
+            var List = ProductList.Where(P=>P.UnitsInStock>0)
+                .Select((P, I) => new { P.ProductID, P.ProductName, Index = I });
+            foreach (var item in List)
             {
                 Console.WriteLine(item);
             }
