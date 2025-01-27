@@ -147,12 +147,24 @@ namespace Assignment
 
             #region LINQ – Transformation Operators
             #region Q1- Return a sequence of just the names of a list of products.
+            ////Fluent Syntax
+            //var NamesOfProducts = ProductList.Select(P => P.ProductName);
+            ////Query Syntax
+            //NamesOfProducts = from P in ProductList
+            //                  select P.ProductName;
+            //foreach(var item in NamesOfProducts)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q2- Produce a sequence of the uppercase and lowercase versions of each word in the original array (Anonymous Types).
+            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
             //Fluent Syntax
-            var NamesOfProducts = ProductList.Select(P => P.ProductName);
+            var UpperAndLower = words.Select(P => new { Upper = P.ToUpper(), Lower = P.ToLower() });
             //Query Syntax
-            NamesOfProducts = from P in ProductList
-                              select P.ProductName;
-            foreach(var item in NamesOfProducts)
+            UpperAndLower = from P in words
+                            select new { Upper = P.ToUpper(), Lower = P.ToLower() };
+            foreach (var item in UpperAndLower)
             {
                 Console.WriteLine(item);
             }
