@@ -131,14 +131,28 @@ namespace Assignment
             //}
             #endregion
             #region Q8- Create a list of all digits in the array whose second letter is 'i' that is reversed from the order in the original array.
-            string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            //string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            ////Fluent Syntax
+            //var SecondLetterI = Arr.Where(P => P[1] == 'i').Reverse();
+            ////Query Syntax
+            //SecondLetterI = (from P in Arr
+            //                where P[1] == 'i'
+            //                select P).Reverse();
+            //foreach (var item in SecondLetterI)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #endregion
+
+            #region LINQ – Transformation Operators
+            #region Q1- Return a sequence of just the names of a list of products.
             //Fluent Syntax
-            var SecondLetterI = Arr.Where(P => P[1] == 'i').Reverse();
+            var NamesOfProducts = ProductList.Select(P => P.ProductName);
             //Query Syntax
-            SecondLetterI = (from P in Arr
-                            where P[1] == 'i'
-                            select P).Reverse();
-            foreach (var item in SecondLetterI)
+            NamesOfProducts = from P in ProductList
+                              select P.ProductName;
+            foreach(var item in NamesOfProducts)
             {
                 Console.WriteLine(item);
             }
