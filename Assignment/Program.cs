@@ -55,14 +55,26 @@ namespace Assignment
             //}
             #endregion
             #region  Q2- Uses a custom comparer to do a case-insensitive sort of the words in an array.
-            string[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            //string[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            ////Fluent Syntax
+            //var CaseInsensitiveSort = Arr.OrderBy(P => P, StringComparer.OrdinalIgnoreCase);
+            ////Query Syntax
+            //CaseInsensitiveSort = from P in Arr
+            //                      orderby StringComparer.OrdinalIgnoreCase
+            //                      select P;
+            //foreach (var item in CaseInsensitiveSort)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q3- Sort a list of products by units in stock from highest to lowest.
             //Fluent Syntax
-            var CaseInsensitiveSort = Arr.OrderBy(P => P, StringComparer.OrdinalIgnoreCase);
+            var SortByUnitsInStock = ProductList.OrderByDescending(P => P.UnitsInStock);
             //Query Syntax
-            CaseInsensitiveSort = from P in Arr
-                                  orderby StringComparer.OrdinalIgnoreCase
-                                  select P;
-            foreach (var item in CaseInsensitiveSort)
+            SortByUnitsInStock = from P in ProductList
+                                 orderby P.UnitsInStock descending
+                                 select P;
+            foreach (var item in SortByUnitsInStock)
             {
                 Console.WriteLine(item);
             }
