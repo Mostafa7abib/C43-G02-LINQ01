@@ -68,13 +68,26 @@ namespace Assignment
             //}
             #endregion
             #region Q3- Sort a list of products by units in stock from highest to lowest.
+            ////Fluent Syntax
+            //var SortByUnitsInStock = ProductList.OrderByDescending(P => P.UnitsInStock);
+            ////Query Syntax
+            //SortByUnitsInStock = from P in ProductList
+            //                     orderby P.UnitsInStock descending
+            //                     select P;
+            //foreach (var item in SortByUnitsInStock)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q4- Sort a list of digits, first by length of their name, and then alphabetically by the name itself.
+            string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
             //Fluent Syntax
-            var SortByUnitsInStock = ProductList.OrderByDescending(P => P.UnitsInStock);
+            var SortByLengthAndName = Arr.OrderBy(P => P.Length).ThenBy(P => P);
             //Query Syntax
-            SortByUnitsInStock = from P in ProductList
-                                 orderby P.UnitsInStock descending
-                                 select P;
-            foreach (var item in SortByUnitsInStock)
+            SortByLengthAndName = from P in Arr
+                                  orderby P.Length, P
+                                  select P;
+            foreach (var item in SortByLengthAndName)
             {
                 Console.WriteLine(item);
             }
