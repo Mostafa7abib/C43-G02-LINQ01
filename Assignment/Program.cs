@@ -181,15 +181,30 @@ namespace Assignment
             //}
             #endregion
             #region Q4- Determine if the value of ints in an array match their position in the array.
-            int[] Arr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
-            //Fluent Syntax
-            var IfMatchOrNot = Arr.Select((P, I) => P == I);
+            //int[] Arr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            ////Fluent Syntax
+            //var IfMatchOrNot = Arr.Select((P, I) => P == I);
+            ////Query Syntax
+            //IfMatchOrNot = from P in Arr
+            //               select P == Arr[P];
+            //foreach (var item in IfMatchOrNot)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q5- Returns all pairs of numbers from both arrays such that the number from numbersA is less than the number from numbersB.
+            int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            int[] numbersB = { 1, 3, 5, 7, 8 };
+            //Fluent Syntax 
+            var CompareOfPairs = numbersA.SelectMany(numbersA => numbersB, (NA, NB) => new { NA, NB }).Where(P => P.NA < P.NB);
             //Query Syntax
-            IfMatchOrNot = from P in Arr
-                           select P == Arr[P];
-            foreach (var item in IfMatchOrNot)
+            CompareOfPairs = from NA in numbersA
+                             from NB in numbersB
+                             where NA < NB
+                             select new { NA, NB };
+            foreach (var item in CompareOfPairs)
             {
-                Console.WriteLine(item);
+                Console.WriteLine($"{item.NA} is less then {item.NB}");
             }
             #endregion
             #endregion
