@@ -170,12 +170,24 @@ namespace Assignment
             //}
             #endregion
             #region Q3- Produce a sequence containing some properties of Products, including UnitPrice which is renamed to Price in the resulting type.
+            ////Fluent Syntax
+            //var PropOfPRoducts = ProductList.Select(P=> new {P.ProductID , P.ProductName,Price =P.UnitPrice});
+            ////Query Syntax
+            //PropOfPRoducts = from P in ProductList
+            //                 select new { P.ProductID, P.ProductName, Price = P.UnitPrice };
+            //foreach (var item in PropOfPRoducts)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q4- Determine if the value of ints in an array match their position in the array.
+            int[] Arr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             //Fluent Syntax
-            var PropOfPRoducts = ProductList.Select(P=> new {P.ProductID , P.ProductName,Price =P.UnitPrice});
+            var IfMatchOrNot = Arr.Select((P, I) => P == I);
             //Query Syntax
-            PropOfPRoducts = from P in ProductList
-                             select new { P.ProductID, P.ProductName, Price = P.UnitPrice };
-            foreach (var item in PropOfPRoducts)
+            IfMatchOrNot = from P in Arr
+                           select P == Arr[P];
+            foreach (var item in IfMatchOrNot)
             {
                 Console.WriteLine(item);
             }
