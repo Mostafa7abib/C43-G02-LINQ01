@@ -31,10 +31,25 @@ namespace Assignment
             //}
             #endregion
             #region Q3 - Returns digits whose name is shorter than their value.
-            string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-            //Fluent Syntax //valid here only
-            var NameShorterThanValue = Arr.Where((P, I) => P.Length < I);
-            foreach(var item in NameShorterThanValue)
+            //string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            ////Fluent Syntax //valid here only
+            //var NameShorterThanValue = Arr.Where((P, I) => P.Length < I);
+            //foreach(var item in NameShorterThanValue)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #endregion
+
+            #region LINQ - Ordering Operators
+            #region Q1- Sort a list of products by name
+            //Fluent Syntax
+            var SortByName = ProductList.OrderBy(P => P.ProductName);
+            //Query Syntax
+            SortByName = from P in ProductList
+                         orderby P.ProductName
+                         select P;
+            foreach(var item in SortByName)
             {
                 Console.WriteLine(item);
             }
