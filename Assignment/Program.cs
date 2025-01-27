@@ -158,13 +158,24 @@ namespace Assignment
             //}
             #endregion
             #region Q2- Produce a sequence of the uppercase and lowercase versions of each word in the original array (Anonymous Types).
-            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
+            //string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
+            ////Fluent Syntax
+            //var UpperAndLower = words.Select(P => new { Upper = P.ToUpper(), Lower = P.ToLower() });
+            ////Query Syntax
+            //UpperAndLower = from P in words
+            //                select new { Upper = P.ToUpper(), Lower = P.ToLower() };
+            //foreach (var item in UpperAndLower)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q3- Produce a sequence containing some properties of Products, including UnitPrice which is renamed to Price in the resulting type.
             //Fluent Syntax
-            var UpperAndLower = words.Select(P => new { Upper = P.ToUpper(), Lower = P.ToLower() });
+            var PropOfPRoducts = ProductList.Select(P=> new {P.ProductID , P.ProductName,Price =P.UnitPrice});
             //Query Syntax
-            UpperAndLower = from P in words
-                            select new { Upper = P.ToUpper(), Lower = P.ToLower() };
-            foreach (var item in UpperAndLower)
+            PropOfPRoducts = from P in ProductList
+                             select new { P.ProductID, P.ProductName, Price = P.UnitPrice };
+            foreach (var item in PropOfPRoducts)
             {
                 Console.WriteLine(item);
             }
