@@ -106,13 +106,26 @@ namespace Assignment
             //}   
             #endregion
             #region Q6- Sort a list of products, first by category, and then by unit price, from highest to lowest.
+            ////Fluent Syntax
+            //var SortByCategoryAndPrice = ProductList.OrderBy(P => P.Category).ThenByDescending(P => P.UnitPrice);
+            ////Query Syntax
+            //SortByCategoryAndPrice = from P in ProductList
+            //                         orderby P.Category, P.UnitPrice descending
+            //                         select P;
+            //foreach (var item in SortByCategoryAndPrice)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q7-  Sort first by word length and then by a case-insensitive descending sort of the words in an array.
+            string[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
             //Fluent Syntax
-            var SortByCategoryAndPrice = ProductList.OrderBy(P => P.Category).ThenByDescending(P => P.UnitPrice);
+            var SortByLengthAndNameDes = Arr.OrderBy(P => P.Length).ThenByDescending(P => P);
             //Query Syntax
-            SortByCategoryAndPrice = from P in ProductList
-                                     orderby P.Category, P.UnitPrice descending
+            SortByLengthAndNameDes = from P in Arr
+                                     orderby P.Length, P descending
                                      select P;
-            foreach (var item in SortByCategoryAndPrice)
+            foreach(var item in SortByLengthAndNameDes)
             {
                 Console.WriteLine(item);
             }
