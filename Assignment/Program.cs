@@ -43,13 +43,26 @@ namespace Assignment
 
             #region LINQ - Ordering Operators
             #region Q1- Sort a list of products by name
+            ////Fluent Syntax
+            //var SortByName = ProductList.OrderBy(P => P.ProductName);
+            ////Query Syntax
+            //SortByName = from P in ProductList
+            //             orderby P.ProductName
+            //             select P;
+            //foreach(var item in SortByName)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region  Q2- Uses a custom comparer to do a case-insensitive sort of the words in an array.
+            string[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
             //Fluent Syntax
-            var SortByName = ProductList.OrderBy(P => P.ProductName);
+            var CaseInsensitiveSort = Arr.OrderBy(P => P, StringComparer.OrdinalIgnoreCase);
             //Query Syntax
-            SortByName = from P in ProductList
-                         orderby P.ProductName
-                         select P;
-            foreach(var item in SortByName)
+            CaseInsensitiveSort = from P in Arr
+                                  orderby StringComparer.OrdinalIgnoreCase
+                                  select P;
+            foreach (var item in CaseInsensitiveSort)
             {
                 Console.WriteLine(item);
             }
