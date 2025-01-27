@@ -118,14 +118,27 @@ namespace Assignment
             //}
             #endregion
             #region Q7-  Sort first by word length and then by a case-insensitive descending sort of the words in an array.
-            string[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            //string[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            ////Fluent Syntax
+            //var SortByLengthAndNameDes = Arr.OrderBy(P => P.Length).ThenByDescending(P => P);
+            ////Query Syntax
+            //SortByLengthAndNameDes = from P in Arr
+            //                         orderby P.Length, P descending
+            //                         select P;
+            //foreach(var item in SortByLengthAndNameDes)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q8- Create a list of all digits in the array whose second letter is 'i' that is reversed from the order in the original array.
+            string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
             //Fluent Syntax
-            var SortByLengthAndNameDes = Arr.OrderBy(P => P.Length).ThenByDescending(P => P);
+            var SecondLetterI = Arr.Where(P => P[1] == 'i').Reverse();
             //Query Syntax
-            SortByLengthAndNameDes = from P in Arr
-                                     orderby P.Length, P descending
-                                     select P;
-            foreach(var item in SortByLengthAndNameDes)
+            SecondLetterI = (from P in Arr
+                            where P[1] == 'i'
+                            select P).Reverse();
+            foreach (var item in SecondLetterI)
             {
                 Console.WriteLine(item);
             }
