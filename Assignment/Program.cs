@@ -193,18 +193,31 @@ namespace Assignment
             //}
             #endregion
             #region Q5- Returns all pairs of numbers from both arrays such that the number from numbersA is less than the number from numbersB.
-            int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
-            int[] numbersB = { 1, 3, 5, 7, 8 };
-            //Fluent Syntax 
-            var CompareOfPairs = numbersA.SelectMany(numbersA => numbersB, (NA, NB) => new { NA, NB }).Where(P => P.NA < P.NB);
+            //int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            //int[] numbersB = { 1, 3, 5, 7, 8 };
+            ////Fluent Syntax 
+            //var CompareOfPairs = numbersA.SelectMany(numbersA => numbersB, (NA, NB) => new { NA, NB }).Where(P => P.NA < P.NB);
+            ////Query Syntax
+            //CompareOfPairs = from NA in numbersA
+            //                 from NB in numbersB
+            //                 where NA < NB
+            //                 select new { NA, NB };
+            //foreach (var item in CompareOfPairs)
+            //{
+            //    Console.WriteLine($"{item.NA} is less then {item.NB}");
+            //}
+            #endregion
+            #region Q6- Select all orders where the order total is less than 500.00.
+            //Fluent Syntax
+            var OrdersLessThan500 = CustomerList.SelectMany(C => C.Orders, (C, O) => new { C.CustomerID, O.OrderID, O.Total }).Where(P => P.Total < 500.00m);
             //Query Syntax
-            CompareOfPairs = from NA in numbersA
-                             from NB in numbersB
-                             where NA < NB
-                             select new { NA, NB };
-            foreach (var item in CompareOfPairs)
+            OrdersLessThan500 = from C in CustomerList
+                                from O in C.Orders
+                                where O.Total < 500.00m
+                                select new { C.CustomerID, O.OrderID, O.Total };
+            foreach (var item in OrdersLessThan500)
             {
-                Console.WriteLine($"{item.NA} is less then {item.NB}");
+                Console.WriteLine(item);
             }
             #endregion
             #endregion
