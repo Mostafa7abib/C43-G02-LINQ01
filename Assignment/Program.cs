@@ -208,14 +208,27 @@ namespace Assignment
             //}
             #endregion
             #region Q6- Select all orders where the order total is less than 500.00.
+            ////Fluent Syntax
+            //var OrdersLessThan500 = CustomerList.SelectMany(C => C.Orders, (C, O) => new { C.CustomerID, O.OrderID, O.Total }).Where(P => P.Total < 500.00m);
+            ////Query Syntax
+            //OrdersLessThan500 = from C in CustomerList
+            //                    from O in C.Orders
+            //                    where O.Total < 500.00m
+            //                    select new { C.CustomerID, O.OrderID, O.Total };
+            //foreach (var item in OrdersLessThan500)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q7- Select all orders where the order was made in 1998 or later.
             //Fluent Syntax
-            var OrdersLessThan500 = CustomerList.SelectMany(C => C.Orders, (C, O) => new { C.CustomerID, O.OrderID, O.Total }).Where(P => P.Total < 500.00m);
+            var OrdersIn1998OrLater = CustomerList.SelectMany(C => C.Orders, (C, O) => new { C.CustomerID, O.OrderID, O.OrderDate }).Where(P => P.OrderDate.Year >= 1998);
             //Query Syntax
-            OrdersLessThan500 = from C in CustomerList
-                                from O in C.Orders
-                                where O.Total < 500.00m
-                                select new { C.CustomerID, O.OrderID, O.Total };
-            foreach (var item in OrdersLessThan500)
+            OrdersIn1998OrLater = from C in CustomerList
+                           from O in C.Orders
+                           where O.OrderDate.Year >= 1998
+                           select new { C.CustomerID, O.OrderID, O.OrderDate };
+            foreach (var item in OrdersIn1998OrLater)
             {
                 Console.WriteLine(item);
             }
