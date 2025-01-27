@@ -80,17 +80,30 @@ namespace Assignment
             //}
             #endregion
             #region Q4- Sort a list of digits, first by length of their name, and then alphabetically by the name itself.
-            string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            //string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            ////Fluent Syntax
+            //var SortByLengthAndName = Arr.OrderBy(P => P.Length).ThenBy(P => P);
+            ////Query Syntax
+            //SortByLengthAndName = from P in Arr
+            //                      orderby P.Length, P
+            //                      select P;
+            //foreach (var item in SortByLengthAndName)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Q5- Sort first by word length and then by a case-insensitive sort of the words in an array.
             //Fluent Syntax
-            var SortByLengthAndName = Arr.OrderBy(P => P.Length).ThenBy(P => P);
+            string[] words = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            var SortByLengthAndName = words.OrderBy(P => P.Length).ThenBy(P=>P);
             //Query Syntax
-            SortByLengthAndName = from P in Arr
+            SortByLengthAndName = from P in words
                                   orderby P.Length, P
                                   select P;
             foreach (var item in SortByLengthAndName)
             {
                 Console.WriteLine(item);
-            }
+            }   
             #endregion
             #endregion
         }
