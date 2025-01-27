@@ -93,17 +93,29 @@ namespace Assignment
             //}
             #endregion
             #region Q5- Sort first by word length and then by a case-insensitive sort of the words in an array.
+            ////Fluent Syntax
+            //string[] words = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            //var SortByLengthAndName = words.OrderBy(P => P.Length).ThenBy(P=>P);
+            ////Query Syntax
+            //SortByLengthAndName = from P in words
+            //                      orderby P.Length, P
+            //                      select P;
+            //foreach (var item in SortByLengthAndName)
+            //{
+            //    Console.WriteLine(item);
+            //}   
+            #endregion
+            #region Q6- Sort a list of products, first by category, and then by unit price, from highest to lowest.
             //Fluent Syntax
-            string[] words = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
-            var SortByLengthAndName = words.OrderBy(P => P.Length).ThenBy(P=>P);
+            var SortByCategoryAndPrice = ProductList.OrderBy(P => P.Category).ThenByDescending(P => P.UnitPrice);
             //Query Syntax
-            SortByLengthAndName = from P in words
-                                  orderby P.Length, P
-                                  select P;
-            foreach (var item in SortByLengthAndName)
+            SortByCategoryAndPrice = from P in ProductList
+                                     orderby P.Category, P.UnitPrice descending
+                                     select P;
+            foreach (var item in SortByCategoryAndPrice)
             {
                 Console.WriteLine(item);
-            }   
+            }
             #endregion
             #endregion
         }
